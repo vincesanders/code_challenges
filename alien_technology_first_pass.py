@@ -51,19 +51,21 @@ class Graph:
 
 class Solution:
     def generateGraph(self, words, graph):
+        graph.letter_set = {char : 0 for word in words for char in word}
+        graph.letter_list = list(graph.letter_set)
         for i in range(len(words) - 1):
             # check if first letters of 2 neighboring words are the same.
             if words[i][0] == words[i + 1][0]:
                 if min(len(words[i]), len(words[i + 1])) > 1:
                     digit = 1
                 else:
-                    graph.letter_list.append(words[i])
-                    graph.letter_set.add(words[i])
                     continue
                 foundLetter = False
                 # go to the next letter
-                while not foundLetter or digit >= min(len(words[i]), len(words[i + 1])):
-                    if words[i][digit] == words[i + 1][digit]:
+                while not foundLetter:
+                    if digit >= min(len(words[i]), len(words[i + 1])):
+                        break
+                    elif words[i][digit] == words[i + 1][digit]:
                         digit += 1
                         continue
                     else:
@@ -94,10 +96,10 @@ words = [
 ]
 
 words2 = ['z', 'x', 'z']
-
 words3 = ['z', 'z']
-
 words4 = ["zy","zx"]
+words5 = ["wrt","wrtkj"]
+words6 = ["abc","ab"]
 
 solution = Solution()
 
@@ -105,3 +107,5 @@ print(solution.alienOrder(words))
 print(solution.alienOrder(words2))
 print(solution.alienOrder(words3))
 print(solution.alienOrder(words4))
+print(solution.alienOrder(words5))
+print(solution.alienOrder(words6))
