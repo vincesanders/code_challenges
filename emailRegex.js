@@ -1,0 +1,1 @@
+const regularExpression = new RegExp("^[a-z]{1,6}_?[0-9]{0,4}$");
